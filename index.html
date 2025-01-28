@@ -20,6 +20,8 @@
         }
         .container {
             max-width: 600px;
+            width: 90%; /* Zmniejsza szerokość na mniejszych ekranach */
+            margin: 0 auto;
         }
         h1 {
             color: #ff0000;
@@ -76,6 +78,23 @@
             100% {
                 text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #ff0000;
                 transform: translateX(-50%) translateY(-50%) skewX(-10deg);
+            }
+        }
+
+        /* Dostosowanie dla telefonów */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            p.warning {
+                font-size: 16px;
+            }
+            .highlight {
+                font-size: 16px;
+            }
+            .glitch {
+                font-size: 16px;
+                top: 25%;
             }
         }
     </style>
