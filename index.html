@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberbezpieczeństwo - Chroń swoje dane</title>
+    <title>Twoje dane w zasięgu ręki - Cyberbezpieczeństwo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,6 +42,8 @@
         <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution"></span></p>
         <p><strong>Język systemu:</strong> <span class="highlight" id="language"></span></p>
         <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone"></span></p>
+        <p><strong>Lokalizacja:</strong> <span class="highlight" id="location"></span></p>
+        <p><strong>Adres IP:</strong> <span class="highlight" id="ip"></span></p>
         <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime"></span></p>
         <p class="warning">Uwaga! Nieświadomie ujawniasz swoje dane, skanując nieznane kody QR.</p>
         <div>
@@ -63,14 +65,33 @@
         document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Nie można określić";
         document.getElementById('language').innerText = navigator.language || "Nie można określić";
 
-        // Dodawanie numeru telefonu (uwaga: nie można uzyskać telefonu bezpośrednio w przeglądarce)
-        document.getElementById('phone').innerText = "Numer telefonu może być przechwycony w innych warunkach!";
+        // Numer telefonu (przykład z ostrzeżeniem)
+        document.getElementById('phone').innerText = "Numer telefonu może być ujawniony w zaawansowanych przypadkach!";
 
-        // Pobieranie aktualnej daty i godziny
+        // Pobieranie daty i godziny
         const now = new Date();
-        const formattedDate = now.toLocaleDateString('pl-PL');
-        const formattedTime = now.toLocaleTimeString('pl-PL');
-        document.getElementById('datetime').innerText = `${formattedDate} ${formattedTime}`;
+        document.getElementById('datetime').innerText = now.toLocaleString('pl-PL');
+
+        // Lokalizacja użytkownika
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                document.getElementById('location').innerText = `Szerokość: ${latitude}, Długość: ${longitude}`;
+            },
+            () => {
+                document.getElementById('location').innerText = "Brak dostępu do lokalizacji.";
+            }
+        );
+
+        // Pobieranie adresu IP (wymaga API)
+        fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip').innerText = data.ip || "Nie można pobrać adresu IP";
+            })
+            .catch(() => {
+                document.getElementById('ip').innerText = "Brak dostępu do adresu IP";
+            });
 
         // Licznik przekierowania
         let countdown = 20;
