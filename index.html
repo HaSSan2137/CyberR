@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twoje dane w zasięgu ręki - Cyberbezpieczeństwo</title>
+    <title>Skanuj, nie zagaduj.</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,47 +26,38 @@
         h1 {
             color: #ff0000;
             font-size: 36px;
-            margin-bottom: 10px;
-            text-align: center;
-            animation: shake 0.5s infinite alternate, glow 1.5s ease-in-out infinite;
-        }
-        p.warning {
-            background-color: #ff3300;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 18px;
-            margin: 20px 0;
+            margin-bottom: 20px;
+            animation: neon-glow 1.5s ease-in-out infinite alternate;
         }
         .highlight {
-            color: #ff00ff;
+            color: #00ff00;
             font-weight: bold;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
         }
-        .highlight:nth-child(1) { animation-delay: 1s; }
-        .highlight:nth-child(2) { animation-delay: 2s; }
-        .highlight:nth-child(3) { animation-delay: 3s; }
-        .highlight:nth-child(4) { animation-delay: 4s; }
-        .highlight:nth-child(5) { animation-delay: 5s; }
-        .highlight:nth-child(6) { animation-delay: 6s; }
-        .highlight:nth-child(7) { animation-delay: 7s; }
-        .highlight:nth-child(8) { animation-delay: 8s; }
-        .highlight:nth-child(9) { animation-delay: 9s; }
-        .highlight:nth-child(10) { animation-delay: 10s; }
-        .highlight:nth-child(11) { animation-delay: 11s; }
-        .highlight:nth-child(12) { animation-delay: 12s; }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+        .glitch {
+            font-size: 18px;
+            color: #ff0000;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: glitch-animation 1s infinite;
         }
 
-        /* Animacja paska postępu */
+        /* Animacja mrugającego tekstu */
+        @keyframes glitch-animation {
+            0% { color: #ff0000; text-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5); }
+            50% { color: #ff00ff; text-shadow: -2px 0px 3px rgba(0, 0, 0, 0.5); }
+            100% { color: #ff0000; text-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5); }
+        }
+
+        /* Animacja neonu dla nagłówka */
+        @keyframes neon-glow {
+            0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+            50% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00; }
+            100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+        }
+
+        /* Dodanie paska postępu */
         .progress-container {
             width: 100%;
             background-color: #333;
@@ -98,99 +89,32 @@
             .highlight {
                 font-size: 16px;
             }
+            .glitch {
+                font-size: 16px;
+                top: 25%;
+            }
         }
 
-        /* Wyróżniający się tekst "Z NAMI JEST BEZPIECZNIEJ, SPRAWDŹ TERAZ" */
-        .secure-text {
+        /* Link na dole strony */
+        .footer-link {
+            color: #ffffff;
+            text-decoration: none;
             font-size: 20px;
-            color: #ff9900; /* Pomarańczowy kolor */
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: center;
-            cursor: pointer;
-            animation: slideIn 3s forwards, shakeText 0.5s infinite alternate;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #333;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
         }
 
-        /* Animacja przesunięcia tekstu */
-        @keyframes slideIn {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Animacja niepokoju w tekście */
-        @keyframes shake {
-            0% {
-                transform: translateX(0);
-                color: #ff0000;
-            }
-            25% {
-                transform: translateX(-5px);
-                color: #ff3300;
-            }
-            50% {
-                transform: translateX(5px);
-                color: #ff6600;
-            }
-            75% {
-                transform: translateX(-5px);
-                color: #ff9900;
-            }
-            100% {
-                transform: translateX(5px);
-                color: #ffcc00;
-            }
-        }
-
-        /* Animacja pulsowania i jaskrawych kolorów */
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
-            }
-            50% {
-                text-shadow: 0 0 10px #ff3300, 0 0 20px #ff3300, 0 0 30px #ff3300, 0 0 60px #ff3300;
-            }
-            100% {
-                text-shadow: 0 0 15px #ff6600, 0 0 30px #ff6600, 0 0 45px #ff6600, 0 0 80px #ff6600;
-            }
-        }
-
-        /* Animacja niepokoju w tekście */
-        @keyframes shakeText {
-            0% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-5px);
-            }
-            50% {
-                transform: translateX(5px);
-            }
-            75% {
-                transform: translateX(-5px);
-            }
-            100% {
-                transform: translateX(5px);
-            }
+        .footer-link:hover {
+            background-color: #ff0000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>NAPRAWDĘ MYŚLISZ, ŻE SKANOWANIE PRZYPADKOWYCH QR JEST BEZPIECZNE?</h1>
-        
-        <!-- Pasek postępu -->
-        <p><strong>POBIERANIE DANYCH UŻYTKOWNIKA...</strong></p>
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        
-        <p>Oto szczegóły Twojego urządzenia:</p>
+        <h1>CZY NAPRAWDĘ MYŚLISZ, ŻE SKANOWANIE LOSOWYCH KODÓW QR JEST BEZPIECZNE?</h1>
         <p><strong>Typ urządzenia:</strong> <span class="highlight" id="device">Pobieranie...</span></p>
         <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser">Pobieranie...</span></p>
         <p><strong>System operacyjny:</strong> <span class="highlight" id="os">Pobieranie...</span></p>
@@ -203,39 +127,83 @@
         <p><strong>Lokalizacja:</strong> <span class="highlight" id="location">Pobieranie...</span></p>
         <p><strong>Adres IP:</strong> <span class="highlight" id="ip">Pobieranie...</span></p>
         <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime">Pobieranie...</span></p>
+        <div>
+            <p>Chroń swoje dane:</p>
+            <ul>
+                <li>"Twoje bezpieczeństwo zaczyna się od świadomości."</li>
+                <li>"Jeden klik może kosztować fortunę - dbaj o swoje dane."</li>
+                <li>"Nie skanuj, zanim nie zaufasz."</li>
+                <li>"Cyberprzestępcy nigdy nie śpią - bądź o krok przed nimi."</li>
+            </ul>
+        </div>
         
-        <p class="warning">Uwaga! Nieświadomie ujawniasz swoje dane, skanując nieznane kody QR.</p>
+        <!-- Pasek postępu -->
+        <p><strong>W trakcie pobierania innych danych...</strong></p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
 
-        <!-- Wyróżniający się tekst -->
-        <p class="secure-text" id="secure-link">Z NAMI JEST BEZPIECZNIEJ, SPRAWDŹ TERAZ</p>
+        <div class="glitch">Wczytuję dane...</div>
+
+        <!-- Link na dole strony -->
+        <a href="https://www.humanitas.edu.pl/" class="footer-link" target="_blank">Z NAMI JEST BEZPIECZNIE - SPRAWDŹ!</a>
     </div>
 
     <script>
-        setInterval(() => {
-            // Symulacja pobierania danych
-            document.getElementById('device').innerText = "Android";
-            document.getElementById('browser').innerText = "Chrome";
-            document.getElementById('os').innerText = "Android 12";
-            document.getElementById('resolution').innerText = "1080x1920";
+        // Pobieranie danych urządzenia i systemu
+        setTimeout(() => {
+            // Typ urządzenia
+            document.getElementById('device').innerText = navigator.platform || "Wykryto!";
+
+            // Przeglądarka
+            document.getElementById('browser').innerText = navigator.userAgent || "Wykryto!";
+
+            // System operacyjny
+            document.getElementById('os').innerText = navigator.appVersion || "Wykryto!";
+
+            // Rozdzielczość ekranu
+            document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Wykryto!";
+
+            // Język systemu
             document.getElementById('language').innerText = navigator.language || "Wykryto!";
+
+            // Połączenie
+            if (navigator.connection) {
+                document.getElementById('connection').innerText = navigator.connection.effectiveType || "Wykryto!";
+            }
+
+            // Fikcyjny numer telefonu i model telefonu
             document.getElementById('phone').innerText = "Wykryto!";
             document.getElementById('phone-model').innerText = "Wykryto!";
-            document.getElementById('connection').innerText = navigator.connection ? navigator.connection.effectiveType : "Wykryto!";
+
+            // Fikcyjny operator
             document.getElementById('operator').innerText = "Wykryto!";
-            document.getElementById('location').innerText = "Wykryto!";
-            document.getElementById('ip').innerText = "Wykryto!";
-            document.getElementById('datetime').innerText = new Date().toLocaleString() || "Wykryto!";
-        }, 1000);
 
-        // Przekierowanie po kliknięciu na "Z NAMI JEST BEZPIECZNIEJ"
-        document.getElementById("secure-link").addEventListener("click", () => {
-            window.location.href = "https://www.humanitas.edu.pl/";
-        });
+            // Pobieranie daty i godziny
+            const now = new Date();
+            document.getElementById('datetime').innerText = now.toLocaleString('pl-PL');
 
-        // Przekierowanie po 15 sekundach
-        setTimeout(() => {
-            window.location.href = "https://www.humanitas.edu.pl/";
-        }, 15000);
+            // Lokalizacja użytkownika
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    document.getElementById('location').innerText = `Szerokość: ${latitude}, Długość: ${longitude}`;
+                },
+                () => {
+                    document.getElementById('location').innerText = "Wykryto!";
+                }
+            );
+
+            // Pobieranie adresu IP
+            fetch('https://api64.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').innerText = data.ip || "Wykryto!";
+                })
+                .catch(() => {
+                    document.getElementById('ip').innerText = "Wykryto!";
+                });
+        }, 2000);
     </script>
 </body>
 </html>
