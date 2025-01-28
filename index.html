@@ -116,11 +116,10 @@
         </div>
         
         <!-- Pasek postępu -->
+        <p><strong>W trakcie pobierania innych danych...</strong></p>
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
-
-        <p>Przekierowanie za <span id="countdown">20</span> sekund...</p>
 
         <div class="glitch">Wczytuję dane...</div>
     </div>
@@ -180,18 +179,6 @@
                     document.getElementById('ip').innerText = "Wykryto!";
                 });
         }, 2000);
-
-        // Licznik przekierowania
-        let countdown = 20;
-        const countdownElement = document.getElementById('countdown');
-        const interval = setInterval(() => {
-            countdown -= 1;
-            countdownElement.innerText = countdown;
-            if (countdown <= 0) {
-                clearInterval(interval);
-                window.location.href = "https://www.humanitas.edu.pl/";
-            }
-        }, 1000);
     </script>
 </body>
 </html>
