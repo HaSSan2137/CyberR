@@ -39,12 +39,13 @@
         <p>Oto szczegóły Twojego urządzenia:</p>
         <p><strong>Typ urządzenia:</strong> <span class="highlight" id="device"></span></p>
         <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser"></span></p>
+        <p><strong>System operacyjny:</strong> <span class="highlight" id="os"></span></p>
         <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution"></span></p>
         <p><strong>Język systemu:</strong> <span class="highlight" id="language"></span></p>
-        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone">+48 123 456 789</span></p> <!-- Dodany fikcyjny numer telefonu -->
-        <p><strong>Model telefonu:</strong> <span class="highlight" id="phone-model">Samsung Galaxy S21</span></p> <!-- Fikcyjny model telefonu -->
-        <p><strong>Typ połączenia:</strong> <span class="highlight" id="connection">Wi-Fi</span></p> <!-- Fikcyjna informacja o połączeniu -->
-        <p><strong>Operator:</strong> <span class="highlight" id="operator">Plus</span></p> <!-- Fikcyjny operator -->
+        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone">Nie dostępne w tej wersji</span></p> <!-- Numer telefonu jest zazwyczaj nieosiągalny przez JavaScript -->
+        <p><strong>Model telefonu:</strong> <span class="highlight" id="phone-model">Nie dostępne w tej wersji</span></p>
+        <p><strong>Połączenie:</strong> <span class="highlight" id="connection"></span></p>
+        <p><strong>Operator:</strong> <span class="highlight" id="operator">Nie dostępne w tej wersji</span></p>
         <p><strong>Lokalizacja:</strong> <span class="highlight" id="location"></span></p>
         <p><strong>Adres IP:</strong> <span class="highlight" id="ip"></span></p>
         <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime"></span></p>
@@ -65,17 +66,23 @@
         // Pobieranie danych urządzenia i systemu
         document.getElementById('device').innerText = navigator.platform || "Nie można określić";
         document.getElementById('browser').innerText = navigator.userAgent || "Nie można określić";
+        document.getElementById('os').innerText = navigator.appVersion || "Nie można określić";
         document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Nie można określić";
         document.getElementById('language').innerText = navigator.language || "Nie można określić";
 
-        // Fikcyjny numer telefonu
-        document.getElementById('phone').innerText = "+48 123 456 789";
+        // Próbujemy uzyskać informacje o połączeniu
+        if (navigator.connection) {
+            document.getElementById('connection').innerText = navigator.connection.effectiveType || "Nie można określić";
+        } else {
+            document.getElementById('connection').innerText = "Brak informacji o połączeniu";
+        }
 
-        // Fikcyjny model telefonu
-        document.getElementById('phone-model').innerText = "Samsung Galaxy S21";
+        // Fikcyjny numer telefonu i model telefonu (nie można ich uzyskać przez JavaScript w przeglądarce)
+        document.getElementById('phone').innerText = "Nie dostępne w tej wersji";
+        document.getElementById('phone-model').innerText = "Nie dostępne w tej wersji";
 
-        // Fikcyjny operator
-        document.getElementById('operator').innerText = "Plus";
+        // Fikcyjny operator (zazwyczaj nie jest dostępny w JavaScript)
+        document.getElementById('operator').innerText = "Nie dostępne w tej wersji";
 
         // Pobieranie daty i godziny
         const now = new Date();
