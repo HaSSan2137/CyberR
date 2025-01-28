@@ -15,6 +15,8 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
+            overflow: hidden;
+            position: relative;
         }
         .container {
             max-width: 600px;
@@ -30,6 +32,54 @@
         }
         .highlight {
             color: #00ffff;
+            font-weight: bold;
+            animation: shake 2s infinite;
+        }
+        .hidden {
+            color: #aaaaaa;
+            visibility: hidden;
+        }
+        .glitch {
+            font-size: 18px;
+            color: #ff00ff;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: glitch 2s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(10deg);
+            }
+            20% {
+                text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
+            }
+            40% {
+                text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(10deg);
+            }
+            60% {
+                text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
+            }
+            80% {
+                text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(10deg);
+            }
+            100% {
+                text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #ff00ff;
+                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
+            }
         }
     </style>
 </head>
@@ -37,18 +87,18 @@
     <div class="container">
         <h1>Twoje dane są właśnie przetwarzane!</h1>
         <p>Oto szczegóły Twojego urządzenia:</p>
-        <p><strong>Typ urządzenia:</strong> <span class="highlight" id="device"></span></p>
-        <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser"></span></p>
-        <p><strong>System operacyjny:</strong> <span class="highlight" id="os"></span></p>
-        <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution"></span></p>
-        <p><strong>Język systemu:</strong> <span class="highlight" id="language"></span></p>
-        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone">Nie dostępne w tej wersji</span></p> <!-- Numer telefonu jest zazwyczaj nieosiągalny przez JavaScript -->
-        <p><strong>Model telefonu:</strong> <span class="highlight" id="phone-model">Nie dostępne w tej wersji</span></p>
-        <p><strong>Połączenie:</strong> <span class="highlight" id="connection"></span></p>
-        <p><strong>Operator:</strong> <span class="highlight" id="operator">Nie dostępne w tej wersji</span></p>
-        <p><strong>Lokalizacja:</strong> <span class="highlight" id="location"></span></p>
-        <p><strong>Adres IP:</strong> <span class="highlight" id="ip"></span></p>
-        <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime"></span></p>
+        <p><strong>Typ urządzenia:</strong> <span class="highlight" id="device">Pobieranie...</span></p>
+        <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser">Pobieranie...</span></p>
+        <p><strong>System operacyjny:</strong> <span class="highlight" id="os">Pobieranie...</span></p>
+        <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution">Pobieranie...</span></p>
+        <p><strong>Język systemu:</strong> <span class="highlight" id="language">Pobieranie...</span></p>
+        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone">Pobieranie...</span></p> 
+        <p><strong>Model telefonu:</strong> <span class="highlight" id="phone-model">Pobieranie...</span></p>
+        <p><strong>Połączenie:</strong> <span class="highlight" id="connection">Pobieranie...</span></p>
+        <p><strong>Operator:</strong> <span class="highlight" id="operator">Pobieranie...</span></p>
+        <p><strong>Lokalizacja:</strong> <span class="highlight" id="location">Pobieranie...</span></p>
+        <p><strong>Adres IP:</strong> <span class="highlight" id="ip">Pobieranie...</span></p>
+        <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime">Pobieranie...</span></p>
         <p class="warning">Uwaga! Nieświadomie ujawniasz swoje dane, skanując nieznane kody QR.</p>
         <div>
             <p>Chroń swoje dane:</p>
@@ -60,54 +110,65 @@
             </ul>
         </div>
         <p>Przekierowanie za <span id="countdown">20</span> sekund...</p>
+
+        <div class="glitch">Wczytuję dane...</div>
     </div>
 
     <script>
         // Pobieranie danych urządzenia i systemu
-        document.getElementById('device').innerText = navigator.platform || "Nie można określić";
-        document.getElementById('browser').innerText = navigator.userAgent || "Nie można określić";
-        document.getElementById('os').innerText = navigator.appVersion || "Nie można określić";
-        document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Nie można określić";
-        document.getElementById('language').innerText = navigator.language || "Nie można określić";
+        setTimeout(() => {
+            // Typ urządzenia
+            document.getElementById('device').innerText = navigator.platform || "Wykryto!";
+            
+            // Przeglądarka
+            document.getElementById('browser').innerText = navigator.userAgent || "Wykryto!";
+            
+            // System operacyjny
+            document.getElementById('os').innerText = navigator.appVersion || "Wykryto!";
+            
+            // Rozdzielczość ekranu
+            document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Wykryto!";
+            
+            // Język systemu
+            document.getElementById('language').innerText = navigator.language || "Wykryto!";
 
-        // Próbujemy uzyskać informacje o połączeniu
-        if (navigator.connection) {
-            document.getElementById('connection').innerText = navigator.connection.effectiveType || "Nie można określić";
-        } else {
-            document.getElementById('connection').innerText = "Brak informacji o połączeniu";
-        }
-
-        // Fikcyjny numer telefonu i model telefonu (nie można ich uzyskać przez JavaScript w przeglądarce)
-        document.getElementById('phone').innerText = "Nie dostępne w tej wersji";
-        document.getElementById('phone-model').innerText = "Nie dostępne w tej wersji";
-
-        // Fikcyjny operator (zazwyczaj nie jest dostępny w JavaScript)
-        document.getElementById('operator').innerText = "Nie dostępne w tej wersji";
-
-        // Pobieranie daty i godziny
-        const now = new Date();
-        document.getElementById('datetime').innerText = now.toLocaleString('pl-PL');
-
-        // Lokalizacja użytkownika
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                document.getElementById('location').innerText = `Szerokość: ${latitude}, Długość: ${longitude}`;
-            },
-            () => {
-                document.getElementById('location').innerText = "Brak dostępu do lokalizacji.";
+            // Połączenie
+            if (navigator.connection) {
+                document.getElementById('connection').innerText = navigator.connection.effectiveType || "Wykryto!";
             }
-        );
 
-        // Pobieranie adresu IP (wymaga API)
-        fetch('https://api64.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('ip').innerText = data.ip || "Nie można pobrać adresu IP";
-            })
-            .catch(() => {
-                document.getElementById('ip').innerText = "Brak dostępu do adresu IP";
-            });
+            // Fikcyjny numer telefonu i model telefonu
+            document.getElementById('phone').innerText = "Wykryto!";
+            document.getElementById('phone-model').innerText = "Wykryto!";
+
+            // Fikcyjny operator
+            document.getElementById('operator').innerText = "Wykryto!";
+
+            // Pobieranie daty i godziny
+            const now = new Date();
+            document.getElementById('datetime').innerText = now.toLocaleString('pl-PL');
+
+            // Lokalizacja użytkownika
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    document.getElementById('location').innerText = `Szerokość: ${latitude}, Długość: ${longitude}`;
+                },
+                () => {
+                    document.getElementById('location').innerText = "Wykryto!";
+                }
+            );
+
+            // Pobieranie adresu IP
+            fetch('https://api64.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').innerText = data.ip || "Wykryto!";
+                })
+                .catch(() => {
+                    document.getElementById('ip').innerText = "Wykryto!";
+                });
+        }, 2000);
 
         // Licznik przekierowania
         let countdown = 20;
