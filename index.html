@@ -28,6 +28,7 @@
             font-size: 36px;
             margin-bottom: 10px;
             text-align: center;
+            animation: shake 0.5s infinite alternate, glow 1.5s ease-in-out infinite;
         }
         p.warning {
             background-color: #ff3300;
@@ -38,7 +39,7 @@
             margin: 20px 0;
         }
         .highlight {
-            color: #00ff00;
+            color: #ff00ff;
             font-weight: bold;
             opacity: 0;
             animation: fadeIn 1s forwards;
@@ -99,22 +100,92 @@
             }
         }
 
-        /* Wyróżniający się tekst "TUTAJ JEST BEZPIECZNIE" */
+        /* Wyróżniający się tekst "Z NAMI JEST BEZPIECZNIEJ, SPRAWDŹ TERAZ" */
         .secure-text {
             font-size: 20px;
-            color: #00ff00;
+            color: #ff9900; /* Pomarańczowy kolor */
             font-weight: bold;
             margin-top: 20px;
             text-align: center;
+            cursor: pointer;
+            animation: slideIn 3s forwards, shakeText 0.5s infinite alternate;
+        }
+
+        /* Animacja przesunięcia tekstu */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Animacja niepokoju w tekście */
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+                color: #ff0000;
+            }
+            25% {
+                transform: translateX(-5px);
+                color: #ff3300;
+            }
+            50% {
+                transform: translateX(5px);
+                color: #ff6600;
+            }
+            75% {
+                transform: translateX(-5px);
+                color: #ff9900;
+            }
+            100% {
+                transform: translateX(5px);
+                color: #ffcc00;
+            }
+        }
+
+        /* Animacja pulsowania i jaskrawych kolorów */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+            }
+            50% {
+                text-shadow: 0 0 10px #ff3300, 0 0 20px #ff3300, 0 0 30px #ff3300, 0 0 60px #ff3300;
+            }
+            100% {
+                text-shadow: 0 0 15px #ff6600, 0 0 30px #ff6600, 0 0 45px #ff6600, 0 0 80px #ff6600;
+            }
+        }
+
+        /* Animacja niepokoju w tekście */
+        @keyframes shakeText {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+            100% {
+                transform: translateX(5px);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Twoje dane są właśnie przetwarzane!</h1>
+        <h1>NAPRAWDĘ MYŚLISZ, ŻE SKANOWANIE PRZYPADKOWYCH QR JEST BEZPIECZNE?</h1>
         
         <!-- Pasek postępu -->
-        <p><strong>W trakcie pobierania innych danych...</strong></p>
+        <p><strong>POBIERANIE DANYCH UŻYTKOWNIKA...</strong></p>
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
@@ -136,69 +207,35 @@
         <p class="warning">Uwaga! Nieświadomie ujawniasz swoje dane, skanując nieznane kody QR.</p>
 
         <!-- Wyróżniający się tekst -->
-        <p class="secure-text">Z NAMI JEST BEZPIECZNIE</p>
+        <p class="secure-text" id="secure-link">Z NAMI JEST BEZPIECZNIEJ, SPRAWDŹ TERAZ</p>
     </div>
 
     <script>
-        // Pobieranie danych urządzenia i systemu
-        setTimeout(() => {
-            // Typ urządzenia
-            document.getElementById('device').innerText = navigator.platform || "Wykryto!";
-            
-            // Przeglądarka
-            document.getElementById('browser').innerText = navigator.userAgent || "Wykryto!";
-            
-            // System operacyjny
-            document.getElementById('os').innerText = navigator.appVersion || "Wykryto!";
-            
-            // Rozdzielczość ekranu
-            document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Wykryto!";
-            
-            // Język systemu
+        setInterval(() => {
+            // Symulacja pobierania danych
+            document.getElementById('device').innerText = "Android";
+            document.getElementById('browser').innerText = "Chrome";
+            document.getElementById('os').innerText = "Android 12";
+            document.getElementById('resolution').innerText = "1080x1920";
             document.getElementById('language').innerText = navigator.language || "Wykryto!";
-
-            // Połączenie
-            if (navigator.connection) {
-                document.getElementById('connection').innerText = navigator.connection.effectiveType || "Wykryto!";
-            }
-
-            // Fikcyjny numer telefonu i model telefonu
             document.getElementById('phone').innerText = "Wykryto!";
             document.getElementById('phone-model').innerText = "Wykryto!";
-
-            // Fikcyjny operator
+            document.getElementById('connection').innerText = navigator.connection ? navigator.connection.effectiveType : "Wykryto!";
             document.getElementById('operator').innerText = "Wykryto!";
+            document.getElementById('location').innerText = "Wykryto!";
+            document.getElementById('ip').innerText = "Wykryto!";
+            document.getElementById('datetime').innerText = new Date().toLocaleString() || "Wykryto!";
+        }, 1000);
 
-            // Pobieranie daty i godziny
-            const now = new Date();
-            document.getElementById('datetime').innerText = now.toLocaleString('pl-PL');
+        // Przekierowanie po kliknięciu na "Z NAMI JEST BEZPIECZNIEJ"
+        document.getElementById("secure-link").addEventListener("click", () => {
+            window.location.href = "https://www.humanitas.edu.pl/";
+        });
 
-            // Lokalizacja użytkownika
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    document.getElementById('location').innerText = `Szerokość: ${latitude}, Długość: ${longitude}`;
-                },
-                () => {
-                    document.getElementById('location').innerText = "Wykryto!";
-                }
-            );
-
-            // Pobieranie adresu IP
-            fetch('https://api64.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ip').innerText = data.ip || "Wykryto!";
-                })
-                .catch(() => {
-                    document.getElementById('ip').innerText = "Wykryto!";
-                });
-        }, 2000);
-
-        // Przekierowanie po 20 sekundach
+        // Przekierowanie po 15 sekundach
         setTimeout(() => {
-            window.location.href = window.location.href;
-        }, 20000);
+            window.location.href = "https://www.humanitas.edu.pl/";
+        }, 15000);
     </script>
 </body>
 </html>
