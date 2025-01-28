@@ -12,20 +12,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
+            justify-content: flex-start; /* Ustawienie na 'flex-start' zamiast 'center' */
+            min-height: 100vh; /* Umożliwia przewijanie strony */
+            margin: 0;
+            overflow-y: auto; /* Umożliwia przewijanie */
         }
         .container {
             max-width: 600px;
-            width: 90%; /* Zmniejsza szerokość na mniejszych ekranach */
-            margin: 0 auto;
+            width: 90%;
+            padding: 20px;
+            margin-top: 20px; /* Dodanie marginesu na górze */
         }
         h1 {
             color: #ff0000;
             font-size: 36px;
+            margin-bottom: 20px;
         }
         p.warning {
             background-color: #ff3300;
@@ -33,12 +34,11 @@
             padding: 10px;
             border-radius: 8px;
             font-size: 18px;
-            animation: shake 0.5s infinite alternate;
+            margin: 20px 0;
         }
         .highlight {
             color: #00ff00;
             font-weight: bold;
-            animation: glitch 2s infinite;
         }
         .glitch {
             font-size: 18px;
@@ -47,40 +47,7 @@
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            animation: glitch 2s infinite;
         }
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(-10px); }
-            100% { transform: translateX(10px); }
-        }
-        @keyframes glitch {
-            0% {
-                text-shadow: -2px -2px 0 #ff0000, 2px 2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(10deg);
-            }
-            20% {
-                text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
-            }
-            40% {
-                text-shadow: -2px -2px 0 #ff0000, 2px 2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(10deg);
-            }
-            60% {
-                text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
-            }
-            80% {
-                text-shadow: -2px -2px 0 #ff0000, 2px 2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(10deg);
-            }
-            100% {
-                text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #ff0000;
-                transform: translateX(-50%) translateY(-50%) skewX(-10deg);
-            }
-        }
-
         /* Dostosowanie dla telefonów */
         @media (max-width: 600px) {
             h1 {
