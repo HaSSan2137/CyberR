@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberbezpieczeństwo - Zastanów się, zanim zeskanujesz</title>
+    <title>Ostrzeżenie - Cyberbezpieczeństwo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,6 +40,7 @@
         <p><strong>Typ urządzenia:</strong> <span class="highlight" id="device"></span></p>
         <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser"></span></p>
         <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution"></span></p>
+        <p><strong>Język systemu:</strong> <span class="highlight" id="language"></span></p>
         <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime"></span></p>
         <p class="warning">Nigdy nie skanuj nieznanych kodów QR. Możesz ujawniać dane bez swojej wiedzy.</p>
         <p><strong>Slogan:</strong> "Kliknij, a ktoś kliknie za Ciebie – chroń swoje dane z nami!"</p>
@@ -47,13 +48,29 @@
     </div>
 
     <script>
-        // Pobieranie danych o urządzeniu
-        document.getElementById('device').innerText = navigator.platform;
-        document.getElementById('browser').innerText = navigator.userAgent;
-        document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}`;
-        
+        // Pobieranie danych urządzenia i systemu
+        document.getElementById('device').innerText = navigator.platform || "Nie można określić";
+        document.getElementById('browser').innerText = navigator.userAgent || "Nie można określić";
+        document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Nie można określić";
+        document.getElementById('language').innerText = navigator.language || "Nie można określić";
+
         // Pobieranie aktualnej daty i godziny
         const now = new Date();
         const formattedDate = now.toLocaleDateString('pl-PL');
         const formattedTime = now.toLocaleTimeString('pl-PL');
-        document.getElementById('datetime').innerText = `${formatte
+        document.getElementById('datetime').innerText = `${formattedDate} ${formattedTime}`;
+
+        // Licznik przekierowania
+        let countdown = 10;
+        const countdownElement = document.getElementById('countdown');
+        const interval = setInterval(() => {
+            countdown -= 1;
+            countdownElement.innerText = countdown;
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = "https://cyberbezpieczenstwo-przykład.pl"; // Link do strony cyberbezpieczeństwa
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
