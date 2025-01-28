@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Warning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    .warning-box {
+      margin: auto;
+      padding: 20px;
+      max-width: 600px;
+      background-color: white;
+      border: 2px solid #ff5555;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    .cta-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 20px;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .cta-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="warning-box">
+    <h1>Cybersecurity Warning</h1>
+    <p><strong>Details about your device:</strong></p>
+    <ul id="device-info">
+      <!-- Device data will be added dynamically -->
+    </ul>
+    <p>This is a demonstration of how easily information can be extracted.</p>
+    <p><strong>Be cautious when scanning unknown QR codes!</strong></p>
+    <a class="cta-button" href="https://www.cyberbezpieczenstwo.pl" target="_blank">Learn More About Cybersecurity</a>
+  </div>
+
+  <script>
+    // Mock device information (in a real-world scenario, use more advanced tools)
+    const deviceInfo = {
+      device: navigator.platform,
+      browser: navigator.userAgent,
+      date: new Date().toLocaleString(),
+    };
+
+    const deviceInfoList = document.getElementById('device-info');
+    for (const [key, value] of Object.entries(deviceInfo)) {
+      const li = document.createElement('li');
+      li.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`;
+      deviceInfoList.appendChild(li);
+    }
+  </script>
+</body>
+</html>
