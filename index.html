@@ -41,7 +41,10 @@
         <p><strong>Przeglądarka:</strong> <span class="highlight" id="browser"></span></p>
         <p><strong>Rozdzielczość ekranu:</strong> <span class="highlight" id="resolution"></span></p>
         <p><strong>Język systemu:</strong> <span class="highlight" id="language"></span></p>
-        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone"></span></p>
+        <p><strong>Numer telefonu:</strong> <span class="highlight" id="phone">+48 123 456 789</span></p> <!-- Dodany fikcyjny numer telefonu -->
+        <p><strong>Model telefonu:</strong> <span class="highlight" id="phone-model">Samsung Galaxy S21</span></p> <!-- Fikcyjny model telefonu -->
+        <p><strong>Typ połączenia:</strong> <span class="highlight" id="connection">Wi-Fi</span></p> <!-- Fikcyjna informacja o połączeniu -->
+        <p><strong>Operator:</strong> <span class="highlight" id="operator">Plus</span></p> <!-- Fikcyjny operator -->
         <p><strong>Lokalizacja:</strong> <span class="highlight" id="location"></span></p>
         <p><strong>Adres IP:</strong> <span class="highlight" id="ip"></span></p>
         <p><strong>Data i godzina:</strong> <span class="highlight" id="datetime"></span></p>
@@ -65,8 +68,14 @@
         document.getElementById('resolution').innerText = `${window.screen.width}x${window.screen.height}` || "Nie można określić";
         document.getElementById('language').innerText = navigator.language || "Nie można określić";
 
-        // Numer telefonu (przykład z ostrzeżeniem)
-        document.getElementById('phone').innerText = "Numer telefonu może być ujawniony w zaawansowanych przypadkach!";
+        // Fikcyjny numer telefonu
+        document.getElementById('phone').innerText = "+48 123 456 789";
+
+        // Fikcyjny model telefonu
+        document.getElementById('phone-model').innerText = "Samsung Galaxy S21";
+
+        // Fikcyjny operator
+        document.getElementById('operator').innerText = "Plus";
 
         // Pobieranie daty i godziny
         const now = new Date();
